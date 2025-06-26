@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap');
+
+:root {
+    --primary-color: #00bfff;
+    --secondary-color: #ffdf00; /* For price highlights */
+    --tertiary-color: #32cd32; /* For returns */
+    --error-color: #ff4d4d;
+    --background-color: rgba(10, 25, 47, 0.85);
+    --panel-background: rgba(0, 0, 0, 0.5);
+    --border-color: rgba(0, 191, 255, 0.3);
+    --text-color: #e0e0e0;
+    --text-secondary-color: #b0b0b0;
+    --border-radius: 12px;
+    --padding: 1.5rem;
+    --gap: 1.5rem;
+    --table-row-even: rgba(255, 255, 255, 0.03);
+    --table-row-odd: rgba(255, 255, 255, 0.06);
+}
+
+.stock-analyzer {
+  padding: var(--padding);
+  color: var(--text-color);
+  font-family: 'Roboto', sans-serif;
+  width: 100%;
+  max-width: 1600px;
+  margin: 2rem auto;
+  background: var(--background-color);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 40px rgba(0, 191, 255, 0.15);
+}
+
+.title {
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    font-size: 2.8rem;
+    color: var(--primary-color);
+    margin-bottom: var(--gap);
+    text-shadow: 0 0 20px rgba(0, 191, 255, 0.6);
+}
+
+.input-container {
+  display: grid;
+  gap: var(--gap);
+  background: var(--panel-background);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--gap);
+}
+
+.api-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    align-items: end;
+}
+
+.fetch-button {
+    background: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.fetch-button:hover {
+    background: #009acd;
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+}
+
+.error-message {
+    color: var(--error-color);
+    text-align: center;
+    margin-bottom: var(--gap);
+    font-size: 1.1rem;
+}
+
+.top-inputs {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.bottom-inputs {
+    grid-template-columns: minmax(150px, 1fr);
+    max-width: 250px;
+    margin: 0 auto;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  margin-bottom: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary-color);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.input-group input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+  background: rgba(0, 191, 255, 0.1);
+}
+
+.data-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.chart-panel {
+    background: var(--panel-background);
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+}
+
+.chart-tabs {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.chart-tabs button {
+    background: rgba(0, 191, 255, 0.1);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chart-tabs button:hover {
+    background: rgba(0, 191, 255, 0.2);
+}
+
+.chart-tabs button.active {
+    background: var(--primary-color);
+    color: #000;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+.chart-container {
+  height: 450px;
+}
+
+.cagr-display {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.cagr-display h4 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--tertiary-color);
+    font-size: 1.2rem;
+    margin-bottom: 0;
+}
+
+.cagr-display p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.cagr-display p span {
+    color: var(--text-secondary-color);
+    margin-right: 0.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+th {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+tr td:first-child, tr th:first-child {
+    text-align: left;
+    font-weight: bold;
+    color: var(--text-secondary-color);
+    min-width: 180px;
+}
+
+td {
+    background: var(--table-row-even);
+}
+
+tbody tr:nth-child(odd) td {
+    background: var(--table-row-odd);
+}
+
+tr.separator td {
+    padding: 0.5rem;
+    background: transparent;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.price-row td {
+    background: rgba(255, 223, 0, 0.1);
+    font-weight: bold;
+}
+
+.price-row td input {
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+td input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  text-align: center;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+td input:hover, td input:focus {
+    background-color: rgba(0, 191, 255, 0.1);
+    outline: none;
+}
+
+.return-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: var(--gap);
+}
+
+.return-display h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--tertiary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.return-display p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+.return-display p span {
+    color: var(--text-secondary-color);
+    margin-right: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .top-inputs { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+}
+
+@media (max-width: 992px) {
+    .title { font-size: 2.2rem; }
+    .table-container { overflow-x: auto; }
+    .return-container { flex-direction: column; }
+}
+
+@media (max-width: 768px) {
+    .api-container { grid-template-columns: 1fr; }
+    .top-inputs { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+    .top-inputs { grid-template-columns: 1fr; }
+}
