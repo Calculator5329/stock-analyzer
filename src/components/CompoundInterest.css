@@ -1,0 +1,390 @@
+/* ====================================
+   COMPOUND INTEREST CALCULATOR STYLES
+   ==================================== */
+
+/* Main Container */
+.compound-interest {
+  max-width: 1600px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: var(--padding);
+  font-family: 'Roboto', sans-serif;
+  color: #e0e0e0;
+}
+
+/* Header Section */
+.ci-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+  background: linear-gradient(135deg, rgba(0, 191, 255, 0.1), rgba(255, 223, 0, 0.05));
+  border-radius: 16px;
+  border: 1px solid rgba(0, 191, 255, 0.2);
+}
+
+.ci-header h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #00bfff;
+  margin: 0 0 1rem 0;
+  text-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+}
+
+.ci-header p {
+  font-size: 1.2rem;
+  color: #b0b0b0;
+  margin: 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Main Content Layout */
+.ci-main-content {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Left Panel - Inputs */
+.ci-inputs-panel {
+  background: rgba(10, 25, 47, 0.9);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px rgba(0, 191, 255, 0.1);
+  height: fit-content;
+  position: sticky;
+  top: 2rem;
+}
+
+.ci-input-section {
+  padding: 2rem;
+}
+
+.ci-input-section h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  color: #00bfff;
+  margin: 0 0 2rem 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Input Groups */
+.ci-input-group {
+  margin-bottom: 1.5rem;
+}
+
+.ci-input-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #b0b0b0;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ci-input-group input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ci-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ci-input-wrapper input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  border-radius: 8px;
+  color: #e0e0e0;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.ci-input-wrapper input:focus {
+  outline: none;
+  border-color: #00bfff;
+  background: rgba(0, 191, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.1);
+}
+
+.ci-currency-symbol,
+.ci-percent-symbol,
+.ci-unit-symbol {
+  position: absolute;
+  color: #b0b0b0;
+  font-weight: 500;
+  font-size: 0.9rem;
+  pointer-events: none;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ci-currency-symbol {
+  left: 0.5rem;
+}
+
+.ci-percent-symbol,
+.ci-unit-symbol {
+  right: 0.75rem;
+}
+
+.ci-input-wrapper input:has(+ .ci-currency-symbol) {
+  padding-left: 2rem;
+}
+
+.ci-input-wrapper input:has(~ .ci-percent-symbol),
+.ci-input-wrapper input:has(~ .ci-unit-symbol) {
+  padding-right: 2.5rem;
+}
+
+.ci-input-wrapper .ci-unit-symbol {
+  right: 4rem;
+}
+
+/* Right Panel - Results */
+.ci-results-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Summary Cards */
+.ci-summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.ci-summary-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.ci-summary-card:hover {
+  background: rgba(0, 0, 0, 0.6);
+  border-color: rgba(0, 191, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+}
+
+.ci-summary-card.ci-primary {
+  background: linear-gradient(135deg, rgba(0, 191, 255, 0.2), rgba(0, 191, 255, 0.1));
+  border-color: rgba(0, 191, 255, 0.5);
+}
+
+.ci-card-header h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #b0b0b0;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ci-card-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00bfff;
+  margin: 0;
+}
+
+.ci-card-value.ci-interest {
+  color: #32cd32;
+}
+
+/* Charts Section */
+.ci-charts-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.ci-chart-container,
+.ci-pie-container {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.ci-chart-container h3,
+.ci-pie-container h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #00bfff;
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+
+/* Table Section */
+.ci-table-section {
+  background: rgba(10, 25, 47, 0.9);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px rgba(0, 191, 255, 0.1);
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.ci-table-section h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #00bfff;
+  margin: 0 0 2rem 0;
+  text-align: center;
+}
+
+.ci-table-container {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ci-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.ci-table th {
+  background: rgba(0, 191, 255, 0.1);
+  color: #00bfff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 2px solid rgba(0, 191, 255, 0.3);
+}
+
+.ci-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.9rem;
+}
+
+.ci-table tr:hover {
+  background: rgba(0, 191, 255, 0.05);
+}
+
+.ci-table tr.ci-starting-row {
+  background: rgba(0, 191, 255, 0.1);
+  font-weight: 600;
+}
+
+.ci-table .ci-balance {
+  color: #00bfff;
+  font-weight: 600;
+}
+
+.ci-table .ci-interest-earned {
+  color: #32cd32;
+}
+
+.ci-table .ci-total-interest {
+  color: #ffdf00;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .ci-main-content {
+    grid-template-columns: 350px 1fr;
+  }
+  
+  .ci-charts-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 992px) {
+  .ci-main-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .ci-inputs-panel {
+    position: static;
+  }
+  
+  .ci-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .ci-summary-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .compound-interest {
+    padding: 0 0.5rem;
+  }
+  
+  .ci-header {
+    padding: 1.5rem 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .ci-header h1 {
+    font-size: 2rem;
+  }
+  
+  .ci-header p {
+    font-size: 1rem;
+  }
+  
+  .ci-input-section,
+  .ci-table-section {
+    padding: 1.5rem;
+  }
+  
+  .ci-card-value {
+    font-size: 1.5rem;
+  }
+  
+  .ci-chart-container,
+  .ci-pie-container {
+    padding: 1rem;
+  }
+  
+  .ci-table th,
+  .ci-table td {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ci-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .ci-input-section {
+    padding: 1rem;
+  }
+  
+  .ci-card-value {
+    font-size: 1.3rem;
+  }
+} 

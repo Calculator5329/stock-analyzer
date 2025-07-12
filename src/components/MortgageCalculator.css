@@ -1,0 +1,461 @@
+/* ====================================
+   MORTGAGE CALCULATOR STYLES
+   ==================================== */
+
+/* Main Container */
+.mortgage-calculator {
+  max-width: 1600px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: var(--padding);
+  font-family: 'Roboto', sans-serif;
+  color: #e0e0e0;
+}
+
+/* Header Section */
+.mc-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+  background: linear-gradient(135deg, rgba(0, 191, 255, 0.1), rgba(255, 223, 0, 0.05));
+  border-radius: 16px;
+  border: 1px solid rgba(0, 191, 255, 0.2);
+}
+
+.mc-header h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #00bfff;
+  margin: 0 0 1rem 0;
+  text-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+}
+
+.mc-header p {
+  font-size: 1.2rem;
+  color: #b0b0b0;
+  margin: 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Main Content Layout */
+.mc-main-content {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Left Panel - Inputs */
+.mc-inputs-panel {
+  background: rgba(10, 25, 47, 0.9);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px rgba(0, 191, 255, 0.1);
+  height: fit-content;
+  position: sticky;
+  top: 2rem;
+}
+
+.mc-input-section {
+  padding: 2rem;
+}
+
+.mc-input-section h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  color: #00bfff;
+  margin: 0 0 2rem 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.mc-input-section h2:not(:first-child) {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 191, 255, 0.2);
+}
+
+/* Input Groups */
+.mc-input-group {
+  margin-bottom: 1.5rem;
+}
+
+.mc-input-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #b0b0b0;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mc-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.mc-input-wrapper input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  border-radius: 8px;
+  color: #e0e0e0;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.mc-input-wrapper input:focus {
+  outline: none;
+  border-color: #00bfff;
+  background: rgba(0, 191, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.1);
+}
+
+.mc-currency-symbol,
+.mc-percent-symbol,
+.mc-unit-symbol {
+  position: absolute;
+  color: #b0b0b0;
+  font-weight: 500;
+  font-size: 0.9rem;
+  pointer-events: none;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.mc-currency-symbol {
+  left: 0.5rem;
+}
+
+.mc-percent-symbol,
+.mc-unit-symbol {
+  right: 0.75rem;
+}
+
+.mc-input-wrapper input:has(+ .mc-currency-symbol) {
+  padding-left: 2rem;
+}
+
+.mc-input-wrapper input:has(~ .mc-percent-symbol),
+.mc-input-wrapper input:has(~ .mc-unit-symbol) {
+  padding-right: 2.5rem;
+}
+
+.mc-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  border-radius: 8px;
+  color: #e0e0e0;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mc-select:focus {
+  outline: none;
+  border-color: #00bfff;
+  background: rgba(0, 191, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.1);
+}
+
+.mc-select option {
+  background: rgba(10, 25, 47, 0.95);
+  color: #e0e0e0;
+}
+
+/* Right Panel - Results */
+.mc-results-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Summary Cards */
+.mc-summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.mc-summary-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.mc-summary-card:hover {
+  background: rgba(0, 0, 0, 0.6);
+  border-color: rgba(0, 191, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.mc-summary-card.mc-primary {
+  background: linear-gradient(135deg, rgba(0, 191, 255, 0.2), rgba(0, 191, 255, 0.1));
+  border-color: rgba(0, 191, 255, 0.5);
+}
+
+.mc-card-header h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #b0b0b0;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mc-card-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00bfff;
+  margin: 0;
+}
+
+.mc-card-value.mc-interest {
+  color: #ff6b6b;
+}
+
+.mc-card-value.mc-date {
+  color: #32cd32;
+  font-size: 1.4rem;
+}
+
+.mc-card-subtitle {
+  font-size: 0.8rem;
+  color: #b0b0b0;
+  margin-top: 0.5rem;
+}
+
+/* Charts Section */
+.mc-charts-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.mc-chart-container,
+.mc-pie-container {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.mc-chart-container h3,
+.mc-pie-container h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #00bfff;
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+
+/* Monthly Breakdown Chart */
+.mc-monthly-breakdown {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  grid-column: 1 / -1;
+}
+
+.mc-monthly-breakdown h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #00bfff;
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+
+/* Table Section */
+.mc-table-section {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.mc-table-section h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #00bfff;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+.mc-table-container {
+  overflow-x: auto;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.mc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.mc-table th {
+  background: rgba(0, 191, 255, 0.1);
+  color: #00bfff;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  padding: 1rem 0.75rem;
+  text-align: center;
+  border-bottom: 2px solid rgba(0, 191, 255, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.mc-table td {
+  padding: 0.75rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+}
+
+.mc-table tr:hover {
+  background: rgba(0, 191, 255, 0.05);
+}
+
+.mc-table tr.mc-year-end {
+  background: rgba(0, 191, 255, 0.1);
+  font-weight: 600;
+}
+
+.mc-table .mc-payment {
+  color: #00bfff;
+  font-weight: 600;
+}
+
+.mc-table .mc-principal {
+  color: #32cd32;
+}
+
+.mc-table .mc-interest {
+  color: #ff6b6b;
+}
+
+.mc-table .mc-balance {
+  color: #ffdf00;
+  font-weight: 600;
+}
+
+.mc-table .mc-total-interest {
+  color: #ff6b6b;
+  font-weight: 500;
+}
+
+.mc-table .mc-more-rows {
+  background: rgba(0, 0, 0, 0.6);
+  font-style: italic;
+  color: #b0b0b0;
+}
+
+.mc-table .mc-more-rows td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .mc-main-content {
+    grid-template-columns: 350px 1fr;
+    gap: 1.5rem;
+  }
+
+  .mc-charts-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 992px) {
+  .mc-main-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .mc-inputs-panel {
+    position: static;
+  }
+
+  .mc-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .mc-summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .mortgage-calculator {
+    padding: 1rem;
+  }
+
+  .mc-header {
+    padding: 1.5rem;
+  }
+
+  .mc-header h1 {
+    font-size: 2rem;
+  }
+
+  .mc-header p {
+    font-size: 1rem;
+  }
+
+  .mc-input-section,
+  .mc-chart-container,
+  .mc-pie-container,
+  .mc-monthly-breakdown {
+    padding: 1rem;
+  }
+
+  .mc-card-value {
+    font-size: 1.5rem;
+  }
+
+  .mc-table th,
+  .mc-table td {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mc-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .mc-input-section {
+    padding: 1rem;
+  }
+
+  .mc-card-value {
+    font-size: 1.3rem;
+  }
+
+  .mc-summary-cards {
+    grid-template-columns: 1fr;
+  }
+} 

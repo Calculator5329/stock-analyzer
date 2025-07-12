@@ -1,16 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
+:root {
+  --primary-color: #00bfff;
+  --secondary-color: #ffdf00;
+  --tertiary-color: #32cd32;
+  --error-color: #ff4d4d;
+  --background-color: rgba(10, 25, 47, 0.85);
+  --panel-background: rgba(0, 0, 0, 0.5);
+  --border-color: rgba(0, 191, 255, 0.3);
+  --text-color: #e0e0e0;
+  --text-secondary-color: #b0b0b0;
+  --border-radius: 12px;
+  --padding: 1.5rem;
+  --gap: 1.5rem;
+  --header-height: 80px;
+}
+
 .App {
   text-align: center;
   position: relative;
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 #tsparticles {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -18,6 +33,119 @@
   z-index: -1;
 }
 
+.main-content {
+  margin-top: var(--header-height);
+  min-height: calc(100vh - var(--header-height));
+  position: relative;
+  z-index: 1;
+}
+
+/* Hide Scrollbar but keep scroll functionality */
+/* For Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* For Internet Explorer and Edge */
+body {
+  -ms-overflow-style: none;
+}
+
+/* Ensure scrolling still works */
+html, body {
+  overflow: auto;
+}
+
+/* Fade Animation */
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+}
+
+.page-container {
+  position: relative;
+  height: 200vh;
+  transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+  touch-action: none;
+}
+
+.page-container.show-calculator {
+  transform: translateY(-50%);
+}
+
 .content {
   z-index: 1;
+  height: 100vh;
+  padding: 2rem 1rem;
+  background: linear-gradient(to bottom, rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.95));
+}
+
+/* Global Select (Dropdown) Styling */
+select {
+  /* Reset default appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* Custom styles */
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-color);
+  padding: 0.8rem 2.5rem 0.8rem 1rem; /* Add padding for arrow */
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* Custom dropdown arrow */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2300bfff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+select:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+}
+
+/* Styles for the <option> elements */
+select option {
+  background-color: #0a192f; /* Dark background for dropdown menu */
+  color: var(--text-color);
+}
+
+
+/* Responsive adjustments for header height */
+@media (max-width: 480px) {
+  :root {
+    --header-height: 60px;
+  }
 }

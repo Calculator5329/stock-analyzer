@@ -1,0 +1,131 @@
+[
+    {
+        "category": "Credit Card Payments",
+        "keywords": [
+            "credit card payment", "cc payment", "visa payment", "mastercard payment", "amex payment", "discover payment",
+            "card payment", "payment to credit card", "capital one payment", "citi payment", "chase payment",
+            "payment to bank of america", "crcardpmt", "e-payment", "epayment", "statement payment", "discover e-payment",
+            "amex epayment", "amz_storecrd_pmt"
+        ]
+    },
+    {
+        "category": "Transfers",
+        "keywords": [
+            "transfer", "xfer", "moneyline", "ally bank", "p2p", "zelle", "venmo", "paypal"
+        ]
+    },
+    {
+        "category": "Food & Dining",
+        "keywords": [
+            "starbucks", "mcdonalds", "burger king", "wendys", "taco bell", "subway", "panera", "dominos", "pizza hut",
+            "chipotle", "panda express", "dunkin", "kfc", "restaurant", "bistro", "cafe", "deli", "diner", "eatery",
+            "grill", "pub", "steakhouse", "bbq", "bar", "brewery", "fast food", "takeout", "food truck", "meal",
+            "whole foods", "trader joe's", "safeway", "kroger", "aldi", "meijer", "heb", "stop & shop", "supermarket",
+            "grocery", "food market", "mart"
+        ]
+    },
+    {
+        "category": "Transportation",
+        "keywords": [
+            "uber", "lyft", "taxi", "cab", "ride share", "bus", "metro", "subway", "train", "amtrak", "transit",
+            "commute", "carpool", "shuttle", "transportation", "gas", "gasoline", "fuel", "chevron", "shell", "exxon",
+            "bp", "marathon", "valero", "sunoco", "car wash", "toll", "parking", "meter", "ez pass", "fasttrak", "bridge toll"
+        ]
+    },
+    {
+        "category": "Housing & Utilities",
+        "keywords": [
+            "rent", "landlord", "mortgage", "zillow", "realtor", "hoa", "association dues", "property tax", "real estate",
+            "home loan", "electric", "electricity", "water", "gas bill", "trash", "sewer", "utility", "comcast", "xfinity",
+            "spectrum", "verizon fios", "internet", "wifi", "cable", "energy", "directv", "att uverse"
+        ]
+    },
+    {
+        "category": "Healthcare",
+        "keywords": [
+            "doctor", "hospital", "clinic", "urgent care", "emergency room", "er", "rx", "prescription", "pharmacy", "cvs",
+            "walgreens", "rite aid", "medicine", "medication", "meds", "vaccination", "immunization", "labcorp", "quest diagnostics",
+            "health", "medical", "dental", "orthodontist", "dentist", "vision", "optometrist", "therapy", "mental health",
+            "chiropractor", "physical therapy"
+        ]
+    },
+    {
+        "category": "Shopping",
+        "keywords": [
+            "amazon", "target", "walmart", "costco", "sam's club", "ebay", "retail", "store", "mall", "outlet", "boutique",
+            "best buy", "newegg", "wayfair", "etsy", "overstock", "wish", "shein", "aliexpress", "online shopping", "order",
+            "purchase", "buy", "store", "pickup"
+        ]
+    },
+    {
+        "category": "Entertainment",
+        "keywords": [
+            "netflix", "hulu", "disney+", "prime video", "spotify", "youtube premium", "movie", "cinema", "fandango", "concert",
+            "eventbrite", "ticketmaster", "show", "theater", "musical", "festival", "broadway", "streaming", "games", "xbox",
+            "playstation", "nintendo", "steam", "epic games", "gaming", "arcade", "fun"
+        ]
+    },
+    {
+        "category": "Subscriptions",
+        "keywords": [
+            "subscription", "membership", "monthly charge", "annual fee", "recurring", "nytimes", "chatgpt", "substack",
+            "patreon", "onlyfans", "fitness app", "cloud storage", "google drive", "dropbox", "icloud", "vpn", "nordvpn",
+            "expressvpn", "adobe", "microsoft 365", "notion", "evernote", "robinhood gold", "yahoo finance plus"
+        ]
+    },
+    {
+        "category": "Loan Payments",
+        "keywords": [
+            "loan", "loan payment", "student loan", "auto loan", "personal loan", "mortgage", "sofi", "lendingclub", "navient",
+            "discover student", "loan servicer", "financing", "principal payment", "refinance", "upstart", "loan payoff"
+        ]
+    },
+    {
+        "category": "Financial Services",
+        "keywords": [
+            "bank fee", "atm fee", "overdraft", "monthly fee", "maintenance fee", "wire transfer", "wire fee", "service charge",
+            "interest charge", "foreign transaction fee", "exchange rate fee", "finance charge"
+        ]
+    },
+    {
+        "category": "Taxes",
+        "keywords": [
+            "irs", "state tax", "federal tax", "property tax", "income tax", "sales tax", "tax payment", "estimated tax",
+            "turbo tax", "h&r block", "taxact", "efile", "tax prep", "pay1040"
+        ]
+    },
+    {
+        "category": "Education",
+        "keywords": [
+            "tuition", "university", "college", "school", "student loan", "textbooks", "udemy", "coursera", "edx", "chegg",
+            "academic", "learning", "course", "class", "exam fee", "certification", "degree program"
+        ]
+    },
+    {
+        "category": "Travel",
+        "keywords": [
+            "airbnb", "hotel", "motel", "hostel", "booking.com", "expedia", "trip", "vacation", "flight", "airline",
+            "delta", "united", "american airlines", "southwest", "travel", "rental car", "avis", "hertz", "enterprise",
+            "resort", "expedia", "priceline", "tripadvisor"
+        ]
+    },
+    {
+        "category": "ATM & Cash",
+        "keywords": [
+            "atm withdrawal", "cash withdrawal", "cash", "atm", "atm deposit", "cash deposit", "teller", "cash back"
+        ]
+    },
+    {
+        "category": "Gifts & Donations",
+        "keywords": [
+            "gift", "donation", "charity", "church", "tithe", "birthday", "wedding", "present", "gofundme", "nonprofit",
+            "fundraiser", "venmo gift", "paypal donation"
+        ]
+    },
+    {
+        "category": "Miscellaneous Expense",
+        "keywords": [
+            "misc", "miscellaneous", "uncategorized", "other", "unknown", "random", "undefined", "general expense", "various"
+        ]
+    }
+] 

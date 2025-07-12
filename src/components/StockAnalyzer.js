@@ -42,7 +42,7 @@ const StockAnalyzer = () => {
   const [data, setData] = useState([]);
   const [expectedReturn, setExpectedReturn] = useState({ totalReturn: 0, annualizedReturn: 0 });
   const [error, setError] = useState('');
-  const [activeChartTab, setActiveChartTab] = useState('revenue'); // 'revenue', 'earnings', 'fairValue'
+  const [activeChartTab, setActiveChartTab] = useState('revenue');
 
   const [revenueCAGR, setRevenueCAGR] = useState({ '1Y': 0, '2Y': 0, '5Y': 0 });
   const [earningsCAGR, setEarningsCAGR] = useState({ '1Y': 0, '2Y': 0, '5Y': 0 });
@@ -75,9 +75,9 @@ const StockAnalyzer = () => {
       const quote = quoteRes.data[0];
 
       if (profile && income && quote) {
-        setInitialRevenue(income.revenue / 1e9); // Convert to billions
+        setInitialRevenue(income.revenue / 1e9);
         setInitialMargin((income.netIncome / income.revenue) * 100);
-        setSharesOutstanding(quote.sharesOutstanding / 1e9); // Convert to billions
+        setSharesOutstanding(quote.sharesOutstanding / 1e9);
         setCurrentStockPrice(profile.price);
         setDividendYield(profile.lastDiv ? (profile.lastDiv / profile.price) * 100 : 0);
       } else {
@@ -101,7 +101,6 @@ const StockAnalyzer = () => {
     const fairValuesForCAGR = [];
     let totalDividends = 0;
 
-    // Add initial year (Year 0) data
     const initialEarnings = currentRevenue * (currentMargin / 100);
     const initialEPS = currentShares > 0 ? initialEarnings / currentShares : 0;
     const initialEstimatedFairValue = initialEPS * (parseFloat(peRatio) || 0);
@@ -127,9 +126,8 @@ const StockAnalyzer = () => {
     let prevRevenue = currentRevenue;
     let prevEarnings = initialEarnings;
     let prevShares = currentShares;
-    let prevMargin = currentMargin; // Track margin for year-over-year growth
+    let prevMargin = currentMargin;
 
-    // Project for 'years' future years
     for (let i = 1; i <= years; i++) { 
         const projectedRevenue = prevRevenue * (1 + (parseFloat(revenueGrowth) || 0) / 100);
         const projectedMargin = prevMargin * (1 + (parseFloat(marginGrowth) || 0) / 100); 
@@ -161,7 +159,7 @@ const StockAnalyzer = () => {
         prevRevenue = projectedRevenue;
         prevEarnings = projectedEarnings;
         prevShares = projectedShares;
-        prevMargin = projectedMargin; // Update margin for next iteration
+        prevMargin = projectedMargin;
 
         revenuesForCAGR.push(projectedRevenue);
         earningsForCAGR.push(projectedEarnings);
@@ -169,7 +167,6 @@ const StockAnalyzer = () => {
     }
     setData(newData);
 
-    // Calculate Expected Return
     const finalFairValue = parseFloat(newData[newData.length - 1]?.estimatedFairValue) || 0;
     if (currentStockPriceVal > 0) {
         const finalValue = finalFairValue + totalDividends;
@@ -180,7 +177,6 @@ const StockAnalyzer = () => {
         setExpectedReturn({ totalReturn: 0, annualizedReturn: 0 });
     }
 
-    // Calculate CAGRs
     setRevenueCAGR({
         '1Y': calculateCAGR(revenuesForCAGR, 1),
         '2Y': calculateCAGR(revenuesForCAGR, 2),
@@ -202,12 +198,6 @@ const StockAnalyzer = () => {
   useEffect(() => {
     calculateData();
   }, [calculateData]);
-
-  const handleDataChange = (index, field, value) => {
-    const newData = [...data];
-    newData[index][field] = value;
-    setData(newData);
-  };
 
   const getChartDataAndOptions = () => {
     let chartLabel = '';
@@ -256,7 +246,7 @@ const StockAnalyzer = () => {
       maintainAspectRatio: false,
       scales: {
         y: {
-          beginAtZero: true, // Always start at 0
+          beginAtZero: true,
           ticks: { color: '#ccc' },
           grid: { color: 'rgba(255, 255, 255, 0.1)' },
         },
@@ -277,72 +267,260 @@ const StockAnalyzer = () => {
 
   return (
     <div className="stock-analyzer">
-        <h1 className="title">Futuristic Stock Analyzer</h1>
-        
-        <div className="api-container input-container">
-            <div className="input-group">
-                <label>Stock Ticker</label>
-                <input type="text" value={ticker} onChange={(e) => setTicker(e.target.value.toUpperCase())} placeholder="e.g., AAPL" />
-            </div>
-            <button onClick={fetchFinancialData} className="fetch-button">Fetch Data</button>
-        </div>
-        {error && <p className="error-message">{error}</p>}
+      {/* Header */}
+      <div className="sa-header">
+        <h1>Stock Analyzer</h1>
+        <p>Analyze and project stock performance with advanced financial modeling</p>
+      </div>
 
-        <div className="input-container top-inputs">
-            <div className="input-group"><label>Years</label><input type="number" value={years} onChange={(e) => setYears(e.target.value)} /></div>
-            <div className="input-group"><label>Revenue ($B)</label><input type="number" value={initialRevenue} onChange={(e) => setInitialRevenue(e.target.value)} /></div>
-            <div className="input-group"><label>Revenue Growth (%)</label><input type="number" value={revenueGrowth} onChange={(e) => setRevenueGrowth(e.target.value)} /></div>
-            <div className="input-group"><label>Net Margin (%)</label><input type="number" value={initialMargin} onChange={(e) => setInitialMargin(e.target.value)} /></div>
-            <div className="input-group"><label>Margin Growth (%)</label><input type="number" value={marginGrowth} onChange={(e) => setMarginGrowth(e.target.value)} /></div>
-            <div className="input-group"><label>Shares Out. (B)</label><input type="number" value={sharesOutstanding} onChange={(e) => setSharesOutstanding(e.target.value)} /></div>
-            <div className="input-group"><label>Shares Change (%)</label><input type="number" value={sharesChange} onChange={(e) => setSharesChange(e.target.value)} /></div>
-            <div className="input-group"><label>Dividend Yield (%)</label><input type="number" value={dividendYield} onChange={(e) => setDividendYield(e.target.value)} /></div>
+      {/* Error Message */}
+      {error && <div className="sa-error-message">{error}</div>}
+
+      {/* Main Content Grid */}
+      <div className="sa-main-content">
+        {/* Left Panel - Inputs */}
+        <div className="sa-inputs-panel">
+          <h2>Investment Parameters</h2>
+          
+          <div className="sa-inputs-grid">
+            <div className="sa-input-group">
+              <label>Stock Ticker</label>
+              <input 
+                type="text" 
+                value={ticker} 
+                onChange={(e) => setTicker(e.target.value.toUpperCase())} 
+                placeholder="Enter ticker (e.g., AAPL)"
+              />
+            </div>
+            
+            <div className="sa-input-group">
+              <label>Years</label>
+              <input 
+                type="number" 
+                value={years} 
+                onChange={(e) => setYears(e.target.value)} 
+              />
+            </div>
+            
+            <div className="sa-input-group">
+              <label>Revenue ($B)</label>
+              <input 
+                type="number" 
+                value={initialRevenue} 
+                onChange={(e) => setInitialRevenue(e.target.value)} 
+              />
+            </div>
+            
+            <div className="sa-input-group">
+              <label>Revenue Growth (%)</label>
+              <input 
+                type="number" 
+                value={revenueGrowth} 
+                onChange={(e) => setRevenueGrowth(e.target.value)} 
+              />
+            </div>
+            
+            <div className="sa-input-group">
+              <label>Net Margin (%)</label>
+              <input 
+                type="number" 
+                value={initialMargin} 
+                onChange={(e) => setInitialMargin(e.target.value)} 
+              />
+            </div>
+            
+            <div className="sa-input-group">
+              <label>Margin Growth (%)</label>
+              <input 
+                type="number" 
+                value={marginGrowth} 
+                onChange={(e) => setMarginGrowth(e.target.value)} 
+              />
+            </div>
+            
+            <div className="sa-input-group">
+              <label>Shares Out. (B)</label>
+              <input 
+                type="number" 
+                value={sharesOutstanding} 
+                onChange={(e) => setSharesOutstanding(e.target.value)} 
+              />
+            </div>
+            
+            <div className="sa-input-group">
+              <label>Shares Change (%)</label>
+              <input 
+                type="number" 
+                value={sharesChange} 
+                onChange={(e) => setSharesChange(e.target.value)} 
+              />
+            </div>
+            
+            <div className="sa-input-group">
+              <label>Exit P/E Ratio</label>
+              <input 
+                type="number" 
+                value={peRatio} 
+                onChange={(e) => setPeRatio(e.target.value)} 
+              />
+            </div>
+            
+            <div className="sa-input-group">
+              <label>Current Stock Price ($)</label>
+              <input 
+                type="number" 
+                value={currentStockPrice} 
+                onChange={(e) => setCurrentStockPrice(e.target.value)} 
+              />
+            </div>
+          </div>
+          
+          <div className="sa-fetch-button-container">
+            <button onClick={fetchFinancialData} className="sa-fetch-button">
+              Fetch Data
+            </button>
+          </div>
         </div>
 
-        <div className="data-container">
-            <div className="chart-panel">
-                <div className="chart-tabs">
-                    <button className={activeChartTab === 'revenue' ? 'active' : ''} onClick={() => setActiveChartTab('revenue')}>Revenue</button>
-                    <button className={activeChartTab === 'earnings' ? 'active' : ''} onClick={() => setActiveChartTab('earnings')}>Earnings</button>
-                    <button className={activeChartTab === 'fairValue' ? 'active' : ''} onClick={() => setActiveChartTab('fairValue')}>Fair Value</button>
-                </div>
-                <div className="chart-container"><Bar data={chartData} options={chartOptions} /></div>
-                <div className="cagr-display">
-                    <h4>CAGR:</h4>
-                    <p><span>1Y:</span> {cagrData['1Y'].toFixed(2)}%</p>
-                    <p><span>2Y:</span> {cagrData['2Y'].toFixed(2)}%</p>
-                    <p><span>5Y:</span> {cagrData['5Y'].toFixed(2)}%</p>
-                </div>
+        {/* Right Panel - Chart */}
+        <div className="sa-chart-panel">
+          <div className="sa-chart-tabs">
+            <button 
+              className={activeChartTab === 'revenue' ? 'active' : ''} 
+              onClick={() => setActiveChartTab('revenue')}
+            >
+              Revenue
+            </button>
+            <button 
+              className={activeChartTab === 'earnings' ? 'active' : ''} 
+              onClick={() => setActiveChartTab('earnings')}
+            >
+              Earnings
+            </button>
+            <button 
+              className={activeChartTab === 'fairValue' ? 'active' : ''} 
+              onClick={() => setActiveChartTab('fairValue')}
+            >
+              Fair Value
+            </button>
+          </div>
+          
+          <div className="sa-chart-container">
+            <Bar data={chartData} options={chartOptions} />
+          </div>
+          
+          <div className="sa-cagr-display">
+            <h4>CAGR:</h4>
+            <div className="sa-cagr-values">
+              <span>1Y: {cagrData['1Y'].toFixed(2)}%</span>
+              <span>2Y: {cagrData['2Y'].toFixed(2)}%</span>
+              <span>5Y: {cagrData['5Y'].toFixed(2)}%</span>
             </div>
-            <div className="table-container">
-                <table>
-                    <thead><tr><th>Metric</th>{data.map(d => <th key={d.year}>{d.year}</th>)}</tr></thead>
-                    <tbody>
-                        <tr><td>Revenue ($B)</td>{data.map((d, i) => <td key={i}><input value={d.revenue} onChange={(e) => handleDataChange(i, 'revenue', e.target.value)} /></td>)}</tr>
-                        <tr><td>Revenue Growth (%)</td>{data.map((d, i) => <td key={i}><input value={d.revenueGrowth} onChange={(e) => handleDataChange(i, 'revenueGrowth', e.target.value)} /></td>)}</tr>
-                        <tr><td>Earnings ($B)</td>{data.map((d, i) => <td key={i}><input value={d.earnings} onChange={(e) => handleDataChange(i, 'earnings', e.target.value)} /></td>)}</tr>
-                        <tr><td>Earnings Growth (%)</td>{data.map((d, i) => <td key={i}><input value={d.earningsGrowth} onChange={(e) => handleDataChange(i, 'earningsGrowth', e.target.value)} /></td>)}</tr>
-                        <tr><td>Net Income Margin (%)</td>{data.map((d, i) => <td key={i}><input value={d.netMargin} onChange={(e) => handleDataChange(i, 'netMargin', e.target.value)} /></td>)}</tr>
-                        <tr className="separator"></tr>
-                        <tr><td>Shares Outstanding (B)</td>{data.map((d, i) => <td key={i}><input value={d.shares} onChange={(e) => handleDataChange(i, 'shares', e.target.value)} /></td>)}</tr>
-                        <tr><td>Earnings Per Share ($)</td>{data.map((d, i) => <td key={i}><input value={d.eps} onChange={(e) => handleDataChange(i, 'eps', e.target.value)} /></td>)}</tr>
-                        <tr><td>Dividend Per Share ($)</td>{data.map((d, i) => <td key={i}><input value={d.dividendPerShare} onChange={(e) => handleDataChange(i, 'dividendPerShare', e.target.value)} /></td>)}</tr>
-                        <tr className="price-row"><td>Est. Fair Value ($)</td>{data.map((d, i) => <td key={i}><input value={d.estimatedFairValue} onChange={(e) => handleDataChange(i, 'estimatedFairValue', e.target.value)} /></td>)}</tr>
-                    </tbody>
-                </table>
+          </div>
+          
+          <div className="sa-return-display">
+            <h4>Expected Return:</h4>
+            <div className="sa-return-values">
+              <span>Total: {expectedReturn.totalReturn.toFixed(2)}%</span>
+              <span>CAGR: {expectedReturn.annualizedReturn.toFixed(2)}%</span>
             </div>
-            <div className="input-container bottom-inputs">
-                 <div className="input-group"><label>Exit P/E Ratio</label><input type="number" value={peRatio} onChange={(e) => setPeRatio(e.target.value)} /></div>
-            </div>
-            <div className="return-container">
-                <div className="input-group"><label>Current Stock Price ($)</label><input type="number" value={currentStockPrice} onChange={(e) => setCurrentStockPrice(e.target.value)} /></div>
-                <div className="return-display">
-                    <h3>Expected Return</h3>
-                    <p><span>Total Return:</span> {expectedReturn.totalReturn.toFixed(2)}%</p>
-                    <p><span>Annualized Return (CAGR):</span> {expectedReturn.annualizedReturn.toFixed(2)}%</p>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
+
+      {/* Data Table */}
+      <div className="sa-table-section">
+        <h2>Financial Projections</h2>
+        <div className="sa-table-container">
+          <table className="sa-table">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                {data.map((d) => (
+                  <th key={d.year}>{d.year}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Revenue ($B)</td>
+                {data.map((d, i) => (
+                  <td key={i}>
+                    <span>{d.revenue}</span>
+                  </td>
+                ))}
+              </tr>
+              <tr>
+                <td>Revenue Growth (%)</td>
+                {data.map((d, i) => (
+                  <td key={i}>
+                    <span>{d.revenueGrowth}</span>
+                  </td>
+                ))}
+              </tr>
+              <tr>
+                <td>Earnings ($B)</td>
+                {data.map((d, i) => (
+                  <td key={i}>
+                    <span>{d.earnings}</span>
+                  </td>
+                ))}
+              </tr>
+              <tr>
+                <td>Earnings Growth (%)</td>
+                {data.map((d, i) => (
+                  <td key={i}>
+                    <span>{d.earningsGrowth}</span>
+                  </td>
+                ))}
+              </tr>
+              <tr>
+                <td>Net Margin (%)</td>
+                {data.map((d, i) => (
+                  <td key={i}>
+                    <span>{d.netMargin}</span>
+                  </td>
+                ))}
+              </tr>
+              <tr className="sa-separator">
+                <td colSpan={data.length + 1}></td>
+              </tr>
+              <tr>
+                <td>Shares Outstanding (B)</td>
+                {data.map((d, i) => (
+                  <td key={i}>
+                    <span>{d.shares}</span>
+                  </td>
+                ))}
+              </tr>
+              <tr>
+                <td>Earnings Per Share ($)</td>
+                {data.map((d, i) => (
+                  <td key={i}>
+                    <span>{d.eps}</span>
+                  </td>
+                ))}
+              </tr>
+              <tr>
+                <td>Dividend Per Share ($)</td>
+                {data.map((d, i) => (
+                  <td key={i}>
+                    <span>{d.dividendPerShare}</span>
+                  </td>
+                ))}
+              </tr>
+              <tr>
+                <td>Estimated Fair Value ($)</td>
+                {data.map((d, i) => (
+                  <td key={i}>
+                    <span>{d.estimatedFairValue}</span>
+                  </td>
+                ))}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

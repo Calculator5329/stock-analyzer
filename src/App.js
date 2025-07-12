@@ -1,8 +1,20 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Suspense, lazy } from 'react';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
-import StockAnalyzer from './components/StockAnalyzer';
+import Header from './components/Header';
 import './App.css';
+
+// Lazy-loaded route components
+const LandingSection = lazy(() => import('./components/LandingSection'));
+const StockAnalyzer = lazy(() => import('./components/StockAnalyzer'));
+const CompoundInterest = lazy(() => import('./components/CompoundInterest'));
+const MortgageCalculator = lazy(() => import('./components/MortgageCalculator'));
+const Budgeting = lazy(() => import('./components/Budgeting'));
+const RetirementPlanner = lazy(() => import('./components/RetirementPlanner'));
+const ExpenseAnalyzer = lazy(() => import('./components/ExpenseAnalyzer'));
+const PortfolioTracker = lazy(() => import('./components/PortfolioTracker'));
 
 function App() {
   const [init, setInit] = useState(false);
@@ -87,16 +99,30 @@ function App() {
 
   if (init) {
     return (
-      <div className="App">
-        <Particles
-          id="tsparticles"
-          particlesLoaded={particlesLoaded}
-          options={particlesOptions}
-        />
-        <div className="content">
-          <StockAnalyzer />
+      <Router>
+        <div className="App">
+          <Particles
+            id="tsparticles"
+            particlesLoaded={particlesLoaded}
+            options={particlesOptions}
+          />
+          <Header />
+          <main className="main-content">
+            <Suspense fallback={<div className="app-loading">Loading...</div>}>
+              <Routes>
+                <Route path="/" element={<LandingSection />} />
+                <Route path="/stock-analyzer" element={<StockAnalyzer />} />
+                <Route path="/compound-interest" element={<CompoundInterest />} />
+                <Route path="/mortgage-calculator" element={<MortgageCalculator />} />
+                <Route path="/budgeting" element={<Budgeting />} />
+                <Route path="/retirement-planner" element={<RetirementPlanner />} />
+                <Route path="/expense-analyzer" element={<ExpenseAnalyzer />} />
+                <Route path="/portfolio-tracker" element={<PortfolioTracker />} />
+              </Routes>
+            </Suspense>
+          </main>
         </div>
-      </div>
+      </Router>
     );
   }
 
