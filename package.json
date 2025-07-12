@@ -2,7 +2,7 @@
   "name": "stock-analyzer",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://username.github.io/stock-analyzer",
+  "homepage": "https://calculator5329.github.io/stock-2.0",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -48,6 +48,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1"
+    "gh-pages": "^6.3.0"
   }
 }
